@@ -9,16 +9,17 @@ namespace AvaloniaApplication6.ViewModels
     {
         public UCViewModel()
         {
+            ShowDialog = new Interaction<DialogViewModel, DialogModel?>();
+
             OpenDialog = ReactiveCommand.CreateFromTask(async () =>
             {
-                var settings = new DialogViewModel();
+                var store = new DialogViewModel();
 
-                var result = await ShowDialog.Handle(settings);
+                var result = await ShowDialog.Handle(store);
             });
         }
-
-        public Interaction<DialogViewModel, Unit> ShowDialog { get; } = new();
+       
         public ICommand OpenDialog { get; }
-
+        public Interaction<DialogViewModel, DialogModel?> ShowDialog { get; }
     }
 }

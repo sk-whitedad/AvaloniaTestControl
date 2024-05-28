@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace AvaloniaApplication6.ViewModels
 {
-    public class DialogViewModel : ViewModelBase
+    public class DialogModel
     {
+
+
     }
 }

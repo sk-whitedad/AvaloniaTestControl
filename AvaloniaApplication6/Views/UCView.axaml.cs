@@ -15,27 +15,19 @@ namespace AvaloniaApplication6.Views
         public UCView()
         {
             InitializeComponent();
-            DataContext = new UCViewModel();
-            this.WhenActivated(action =>
-                action(ViewModel!.ShowDialog.RegisterHandler(Handler)));
+            this.WhenActivated(action => action(ViewModel!.ShowDialog.RegisterHandler(DoShowDialogAsync)));
         }
 
-        private Window _window;
-        private void Visual_OnAttachedToVisualTree(object? sender, VisualTreeAttachmentEventArgs e)
-        {
-            _window = this.FindAncestorOfType<Window>();
-        }
 
-        private async Task Handler(InteractionContext<DialogViewModel, Unit> interaction)
-        {
-            var dialog = new DialogView()
-            {
-                DataContext = interaction.Input
-            };
 
- 
-            var result = await dialog.ShowDialog<Unit>(_window);
+        private async Task DoShowDialogAsync(InteractionContext<DialogViewModel, DialogModel?> interaction)
+        {
+            var dialog = new DialogView();
+            dialog.DataContext = interaction.Input;
+            var mainWindow = ((IClassicDesktopStyleApplicationLifetime)Application.Current.ApplicationLifetime).MainWindow;
+            var result = await dialog.ShowDialog<DialogModel?>(mainWindow);
             interaction.SetOutput(result);
         }
+
     }
 }
