@@ -1,10 +1,7 @@
 ﻿using ReactiveUI;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reactive;
-using System.Text;
-using System.Threading.Tasks;
+using System.Reactive.Linq;
+using System.Windows.Input;
 
 namespace AvaloniaApplication6.ViewModels
 {
@@ -21,7 +18,7 @@ namespace AvaloniaApplication6.ViewModels
         }
 
         public Interaction<DialogViewModel, Unit> ShowDialog { get; } = new();
-        public IReactiveCommand<Unit, Unit> OpenDialog { get; }
+        public ICommand OpenDialog { get; }
 
     }
 }
